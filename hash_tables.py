@@ -17,11 +17,27 @@ class LinearProbe:
 
     def add(self, key, value):
         start_hash = self.hash_function(key, self.N)
+
+        for i in range(self.N):
+            test_slot = (start_hash + i) % self.N
+            if self.T[test_slot] == None:
+                self.T[test_slot] = (key, value)
+                self.M += 1
+                return True
+        return False
+
         
         pass
 
     def search(self, key):
         start_hash = self.hash_function(key, self.N)
+
+        for i in range(self.N):
+            test_slot = (start_hash + i) % self.N
+            if self.T[test_slot] == None:
+                return None
+            if self.T[test_slot][0] == key:
+                return self.T[test_slot][1]
         pass
 
 class ChainedHash:

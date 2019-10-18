@@ -13,11 +13,23 @@ class TestLinearProbe(unittest.TestCase):
     def test_add_function(self):
         test = ht.LinearProbe(50,hf.h_ascii)
         test.add('text','value')
-        self.assertEqual(test.T[3],'value')
-'''
+        self.assertEqual(test.T[3][1],'value')
+
     def test_search_function(self):
         test = ht.LinearProbe(50,hf.h_ascii)
-        test.
-'''     
+        test.add('text','value')
+        self.assertEqual(test.search('text'),'value')
+        
+    def test_no_overwrite(self):
+        test = ht.LinearProbe(50,hf.h_ascii)
+        test.add('text','value')
+        test.add('text','newvalue')
+        self.assertEqual(test.T[3][1],'value')
 
+    def test_search_bad_value(self):
+        test = ht.LinearProbe(50,hf.h_ascii)
+        test.add('text','value')
+        self.assertEqual(test.search('nothere'),None)
+    
+        
         
