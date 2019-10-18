@@ -31,5 +31,11 @@ class TestLinearProbe(unittest.TestCase):
         test.add('text','value')
         self.assertEqual(test.search('nothere'),None)
     
-        
+class TestChainedHash(unittest.TestCase):
+    def test_input_params(self):
+        self.assertRaises(TypeError,ht.ChainedHash,None,hf.h_ascii)
+        self.assertRaises(TypeError,ht.ChainedHash,10,None)
+        self.assertRaises(TypeError,ht.ChainedHash,10.0,hf.h_ascii)
+        self.assertRaises(TypeError,ht.ChainedHash,[1,1,1],hf.h_ascii)
+        self.assertRaises(TypeError,ht.ChainedHash,'tct',hf.h_ascii)
         

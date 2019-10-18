@@ -42,6 +42,14 @@ class LinearProbe:
 
 class ChainedHash:
     def __init__(self, N, hash_function):
+        
+        if N is None:
+            raise TypeError('ChainedHash: must supply a table size')
+        if hash_function is None:
+            raise TypeError('ChainedHash: must supply a hash function')
+            
+        if not isinstance(N, int):
+            raise TypeError('ChainedHash: table size must be an integer')
         self.hash_function = hash_function
         self.N = N
 
