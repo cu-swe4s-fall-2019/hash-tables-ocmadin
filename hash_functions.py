@@ -12,10 +12,12 @@ def h_ascii(key, N):
     
     if not isinstance(N, int):
         raise TypeError('h_ascii: N must be an integer')
-                
-    
-    
-    return None
+        
+    s = 0
+    for i in range(len(key)):
+        s += ord(key[i])
+    return s % N
+
 
 def h_rolling(key, N):
     return None
