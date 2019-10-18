@@ -2,6 +2,30 @@ import hash_functions
 
 
 class LinearProbe:
+    
+    """
+    LinearProbe hash table method
+    
+    ...
+    
+    Attributes
+    ----------
+    N : int
+        Size of the hash table
+    hash_function : function
+        valid hash function to assign values to table locations
+    T : list
+        Hash table
+    M : int
+        Number of values in the table
+    
+    Methods
+    -------
+    add(key,value)
+        Add a key-value pair to the hash table
+    search(key)
+        Find and retrieve a value for the provided key
+    """
     def __init__(self, N, hash_function):
         if N is None:
             raise TypeError('LinearProbe: must supply a table size')
@@ -41,6 +65,32 @@ class LinearProbe:
 
 
 class ChainedHash:
+    
+    """
+   ChainedHash hash table method
+    
+    ...
+    
+    Attributes
+    ----------
+    N : int
+        Size of the hash table
+    hash_function : function
+        valid hash function to assign values to table locations
+    T : list
+        Hash table
+    M : int
+        Number of values in the table
+    
+    Methods
+    -------
+    add(key,value)
+        Add a key-value pair to the hash table
+    search(key)
+        Find and retrieve a value for the provided key
+    """
+    
+    
     def __init__(self, N, hash_function):
 
         if N is None:

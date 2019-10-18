@@ -1,5 +1,20 @@
 
 def h_ascii(key, N):
+    
+    """ 
+    ASCII hash function
+    
+    Parameters
+    ----------
+    key : str
+        Hash key, must be a string
+    N : int 
+        Size of hash table
+    
+    Returns
+    -------
+    Hash output: location in table to write to
+    """
 
     if key is None:
         raise TypeError('h_ascii: must supply a key')
@@ -20,6 +35,25 @@ def h_ascii(key, N):
 
 
 def h_rolling(key, N, p=53, m=2**64):
+    
+    """ 
+    Polynomial rolling hash function
+    
+    Parameters
+    ----------
+    key : str
+        Hash key, must be a string
+    N : int 
+        Size of hash table
+    p : float or int
+        Optional, prime number roughly the size of the alphabet used
+    m : int
+        Optional, large number for modular arithmetic
+    
+    Returns
+    -------
+    Hash output: location in table to write to
+    """
 
     if key is None:
         raise TypeError('h_ascii: must supply a key')
