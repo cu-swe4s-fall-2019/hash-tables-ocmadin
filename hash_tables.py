@@ -50,15 +50,28 @@ class ChainedHash:
             
         if not isinstance(N, int):
             raise TypeError('ChainedHash: table size must be an integer')
+            
         self.hash_function = hash_function
         self.N = N
+        self.T = [ [] for i in range(N) ]
+        self.M = 0
+
 
     def add(self, key, value):
+        
         start_hash = self.hash_function(key, self.N)
+        self.T[start_hash].append((key,value))
+        self.M += 1
+        return True
         pass
 
     def search(self, key):
         start_hash = self.hash_function(key, self.N)
+
+        for k,v in self.T[start_hash]:
+            if key == k:
+                return v
+        return None
         pass
 
 
