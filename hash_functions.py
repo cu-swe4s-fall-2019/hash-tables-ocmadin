@@ -19,7 +19,7 @@ def h_ascii(key, N):
     return s % N
 
 
-def h_rolling(key, N):
+def h_rolling(key, N, p=53, m=2**64):
     
     if key is None:
         raise TypeError('h_ascii: must supply a key')
@@ -34,4 +34,9 @@ def h_rolling(key, N):
         raise TypeError('h_ascii: N must be an integer')   
     
     
-    return None
+    s = 0
+    for i in range(len(key)):
+        s += ord(key[i]) * p**i
+    s = s % m
+    return s % N 
+

@@ -42,4 +42,16 @@ class testHRolling(unittest.TestCase):
         self.assertRaises(TypeError,hf.h_rolling,'text','text')
         self.assertRaises(TypeError,hf.h_rolling,'text',['text','text','text'])
         self.assertRaises(TypeError,hf.h_rolling,'text',{})    
+        
+    def test_return_int(self):
+        self.assertTrue(type(hf.h_rolling('text',20))==int)
+
+    def test_output_fixed_input(self):
+        self.assertEqual(hf.h_rolling('text',50),31)
+        
+    def test_output_random_input(self):
+        for i in range(1000):
+            random_hash = ''.join([random.choice(string.ascii_letters + string.digits + string.punctuation) for n in range(32)])
+            random_N = random.randint(1,1000)
+            self.assertLess(hf.h_rolling(random_hash,random_N),random_N)
             
