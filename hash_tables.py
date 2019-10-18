@@ -1,5 +1,7 @@
 import hash_functions
-
+import sys
+import random
+import time
 
 class LinearProbe:
     
@@ -122,3 +124,56 @@ class ChainedHash:
                 return v
         return None
         pass
+
+def reservoir_sampling(new_val, size, V):
+    if len(V) < size:
+        V.append(new_val)
+    else:
+        j = random.randint(0, len(V))
+        if j < len(V):
+            V[j] = new_val
+
+
+if __name__ == '__main__':
+
+    N = int(sys.argv[1])
+    hash_alg = sys.argv[2]
+    collision_strategy = sys.argv[3]
+    data_file_name= sys.argv[4]
+    keys_to_add = int(sys.argv[5])
+
+    ht = None
+
+    if hash_alg == 'ascii':
+
+        if collision_strategy == 'linear':
+            ht = LinearProbe(N, hash_functions.h_ascii)
+        elif collision_strategy == 'chain':
+            ht = ChainedHash(N, hash_functions.h_ascii)
+
+    elif hash_alg == 'rolling':
+
+        if collision_strategy == 'linear':
+            ht = LinearProbe(N, hash_functions.h_rolling)
+        elif collision_strategy == 'chain':
+            ht = ChainedHash(N, hash_functions.h_rolling)
+
+
+    keys_to_search = 100
+    V = []
+
+    for l in open(data_file_name):
+        reservoir_sampling(l, keys_to_search, V)
+        t0 = time.time()
+        ht.add(l, l)
+        t1 = time.time()
+        print('add', ht.M/ht.N, t1 - t0)
+        if ht.M == keys_to_add:
+            break
+
+
+    for v in V:
+        t0 = time.time()
+        r = ht.search(v)
+        t1 = time.time()
+        print('search', t1 - t0)

@@ -1,4 +1,6 @@
 
+import sys
+
 def h_ascii(key, N):
     
     """ 
@@ -72,3 +74,14 @@ def h_rolling(key, N, p=53, m=2**64):
         s += ord(key[i]) * p**i
     s = s % m
     return s % N
+
+
+
+if __name__ == '__main__':
+    
+    for l in open(sys.argv[1]):
+        if sys.argv[2] == 'ascii':
+            print(h_ascii(l, 1000))
+        elif sys.argv[2] == 'rolling':
+            print(h_rolling(l, 1000))
+
