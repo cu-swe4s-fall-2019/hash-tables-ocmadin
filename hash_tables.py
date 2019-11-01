@@ -108,6 +108,7 @@ class ChainedHash:
         self.T = [[] for i in range(N)]
         self.M = 0
 
+
     def add(self, key, value):
 
         start_hash = self.hash_function(key, self.N)
@@ -123,7 +124,15 @@ class ChainedHash:
             if key == k:
                 return v
         return None
-        pass
+
+    def search_loc(self, key):
+        start_hash = self.hash_function(key, self.N)
+
+        for k, v in self.T[start_hash]:
+            if key == k:
+                return start_hash
+        return None
+        
 
 def reservoir_sampling(new_val, size, V):
     if len(V) < size:
@@ -133,7 +142,7 @@ def reservoir_sampling(new_val, size, V):
         if j < len(V):
             V[j] = new_val
 
-
+'''
 if __name__ == '__main__':
 
     N = int(sys.argv[1])
@@ -177,3 +186,4 @@ if __name__ == '__main__':
         r = ht.search(v)
         t1 = time.time()
         print('search', t1 - t0)
+        '''
